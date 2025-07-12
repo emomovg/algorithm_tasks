@@ -25,7 +25,7 @@ func main() {
 
 	var finalResult []int
 	for _, arr := range allArrays {
-		finalResult = getMappedPositions(quickSort(arr), arr)
+		finalResult = GetMappedPositions(QuickSort(arr), arr)
 		for i := 0; i < len(finalResult); i++ {
 			fmt.Printf("%v ", finalResult[i])
 		}
@@ -33,7 +33,7 @@ func main() {
 	}
 }
 
-func quickSort(arr []int) []int {
+func QuickSort(arr []int) []int {
 	var left []int
 	var right []int
 
@@ -51,10 +51,10 @@ func quickSort(arr []int) []int {
 		}
 	}
 
-	return append(append(quickSort(left), pivot), quickSort(right)...)
+	return append(append(QuickSort(left), pivot), QuickSort(right)...)
 }
 
-func getMappedPositions(sortedArray []int, originalArray []int) []int {
+func GetMappedPositions(sortedArray []int, originalArray []int) []int {
 	type PositionInfo struct {
 		Count int
 		Place int
