@@ -12,30 +12,42 @@ type user struct {
 func main() {
 	var n, q int
 	fmt.Scan(&n, &q)
-	var x, y int
-	var arr []user
-	var result []int
-	var last int
-	var number int
+	var requests [][]int
 	for i := 0; i < q; i++ {
+		var x, y int
 		fmt.Scan(&x, &y)
-		if x == 1 {
-			number++
-			arr = append(arr, user{numberRequest: number, lastNotification: y})
-		}
-		if x == 2 {
-			last = 0
+		requests = append(requests, []int{x, y})
+	}
+	finalResults := ProcessRequests(requests)
 
-			for _, value := range arr {
-				if value.lastNotification == 0 || value.lastNotification == y {
-					last = value.numberRequest
+	for _, val := range finalResults {
+
+		fmt.Println(val)
+	}
+}
+
+func ProcessRequests(requests [][]int) []int {
+	var users []user
+	var results []int
+	var currentRequestNumber int
+
+	for _, req := range requests {
+		x := req[0]
+		y := req[1]
+
+		if x == 1 {
+			currentRequestNumber++
+			users = append(users, user{numberRequest: currentRequestNumber, lastNotification: y})
+		} else if x == 2 {
+			var lastMatch int = 0
+
+			for _, u := range users {
+				if u.lastNotification == 0 || u.lastNotification == y {
+					lastMatch = u.numberRequest
 				}
 			}
-			result = append(result, last)
+			results = append(results, lastMatch)
 		}
 	}
-	for _, value := range result {
-		fmt.Println(value)
-	}
-	fmt.Println()
+	return results
 }
