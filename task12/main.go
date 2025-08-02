@@ -30,8 +30,11 @@ func Run(in *bufio.Reader, out *bufio.Writer) {
 			fmt.Fprint(out, "1\n1 1 R")
 		} else if m == 1 {
 			fmt.Fprint(out, "1\n1 1 D")
-		} else {
+		} else if n > m {
+
 			fmt.Fprint(out, "2\n1 1 D\n", n, " ", m, " U")
+		} else if m >= n {
+			fmt.Fprint(out, "2\n1 1 R\n", n, " ", m, " L")
 		}
 
 		if i < t-1 {
